@@ -6,6 +6,7 @@ from playwright.sync_api import Page
 class TodoPage:
     def __init__(self, page: Page, base_url: str = "https://demo.playwright.dev/todomvc"):
         self.page = page
+        self.base_url = base_url
         self.new_todo_input = page.locator(TodoLocator.NEW_TODO_CSS)
         self.todo_list = page.locator(TodoLocator.TODO_LIST_CSS)
         self.todo_items = page.locator(TodoLocator.TODO_ITEM_CSS)
@@ -54,10 +55,20 @@ class TodoPage:
         self.filter_completed.click()
         self.page.wait_for_timeout(500)  # wait for the filter to apply
         return self
-    
 
+    def complete_todo(self, index: int):
+        self.toggle_buttons.nth(index).click()
+        self.page.wait_for_timeout(500)  # wait for toggle state to update
+        return self
 
-        
+    def clear_completed(self):
+        self.clear_completed_button.click()
+        self.page.wait_for_timeout(500)  # wait for completed todos to clear
+        return self
 
+    def visible_todo_count(self):
+        return self.page.locator(f"{TodoLocator.TODO_ITEM_CSS}:visible").count()
 
-    
+    def visible_todo_texts(self):
+        return self.page.locator(f"{TodoLocator.TODO_ITEM_CSS}:visible label").all_text_contents()
+
