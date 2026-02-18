@@ -1,0 +1,10 @@
+class TodoLocator:
+    NEW_TODO_CSS = ".new-todo"
+    TODO_LIST_CSS = ".todo-list"
+    TODO_ITEM_CSS = ".todo-list li"
+    TOGGLE_CSS = ".toggle"
+    DESTROY_CSS = ".destroy"
+    TODO_COUNT_CSS = ".todo-count"
+    CLEAR_COMPLETED_CSS = ".clear-completed"
+    FILTER_ACTIVE_CSS = ".filters a[href='#/active']"
+    FILTER_COMPLETED_CSS = ".filters a[href='#/completed']"
